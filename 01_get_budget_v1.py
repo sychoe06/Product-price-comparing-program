@@ -9,4 +9,4 @@ while budget < 0:
         print("Please enter a positive number! Try again\n")
     else:
         break
-print("program continues...")
+print("valid!")  # prints "valid" for testing purposes
