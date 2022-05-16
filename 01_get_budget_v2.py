@@ -1,15 +1,22 @@
 """Get budget - Trial 2
 Uses a number checker to make sure only numbers are entered.
-And the program does not crash when invalid strings are entered as well.
+And the program does not crash when strings or blanks are entered.
 """
 
 
-# Check for valid float (number)
+# Checks for valid positive float (number)
 def number_checker(question):
-    number = ""
-    while not number:
+    number = -1
+    error = "Please enter a positive integer or float!\n"
+    while number < 0:
         try:
             number = float(input(question))
-            return number
+            if number < 0:
+                print(error)
+            else:
+                return number
         except ValueError:
-            print("\nPlease enter a positive number! Try again")
+            print(error)
+
+
+budget = number_checker("Enter budget: ")
