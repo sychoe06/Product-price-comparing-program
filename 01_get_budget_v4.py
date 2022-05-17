@@ -4,7 +4,7 @@ function. This follows the PEP8 standard.
 """
 
 
-# Checks for valid positive float (number)
+# Checks for valid positive number
 def number_checker(question):
     number = -1
     error = "Please enter a positive number! No letters and can't be blank\n"
@@ -19,5 +19,6 @@ def number_checker(question):
             print(error)
 
 
+# Main routine
 budget = number_checker("Enter budget: ")
 print("valid!")  # prints "valid" for testing purposes

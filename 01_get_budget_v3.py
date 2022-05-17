@@ -6,7 +6,7 @@ error means.
 """
 
 
-# Checks for valid positive float (number)
+# Checks for valid positive number
 def number_checker(question):
     number = -1
     ERROR = "Please enter a positive number! No letters and can't be blank\n"
@@ -21,5 +21,6 @@ def number_checker(question):
             print(ERROR)
 
 
+# Main routine
 budget = number_checker("Enter budget: ")
 print("valid!")  # prints "valid" for testing purposes

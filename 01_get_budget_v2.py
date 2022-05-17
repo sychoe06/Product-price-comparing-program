@@ -4,12 +4,12 @@ And the program does not crash when strings or blanks are entered.
 """
 
 
-# Checks for valid positive float (number)
+# Checks for valid positive number
 def number_checker(question):
     number = -1
     while number < 0:
         try:
-            number = float(input    (question))
+            number = float(input(question))
             if number < 0:
                 print("Please enter a positive integer or float!\n")
             else:
@@ -18,5 +18,6 @@ def number_checker(question):
             print("Please enter a positive integer or float!\n")
 
 
+# Main routine
 budget = number_checker("Enter budget: ")
 print("valid!")  # prints "valid" for testing purposes
