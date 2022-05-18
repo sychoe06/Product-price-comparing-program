@@ -6,7 +6,7 @@ budget = -1
 while budget < 0:
     budget = float(input("Enter budget: "))
     if budget < 0:  # if the number is negative than prints error
-        print("Please enter a positive number! Try again\n")
+        print("Please enter a positive integer or float!\n")
     else:
         break
 print("valid!")  # prints "valid" for testing purposes
