@@ -8,19 +8,19 @@ input statement and changed the error message to being more generic
 
 
 # Checks for valid options
-def check_units(question, valid_options):
+def check_valid(question, valid_options):
     error = "Sorry that is not a valid choice\n"
     getting_option = True
     while getting_option is True:
         response = input(question).lower()
-        for unit in valid_options:
-            if response in unit:
-                response = unit[0].lower()
+        for option in valid_options:
+            if response in option:
+                response = option[0].lower()
                 return response
             else:
                 break
         print(error)
-    return check_units(question, valid_options)
+    return check_valid(question, valid_options)
 
 
 # Main routine
