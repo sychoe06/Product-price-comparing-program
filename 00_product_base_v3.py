@@ -53,9 +53,9 @@ valid_units = [["kg", "kilograms", "kilogram"],
     # Get budget
     budget = number_checker("Enter budget: ")
 
-    # Get unit to use for products
+    # Get main unit for products
     main_unit = check_units("Enter main unit for products (e.g. kg, ml etc): ",
-                        valid_units)
+                            valid_units)
 
     # Get product details
 
