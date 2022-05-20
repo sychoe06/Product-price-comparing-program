@@ -37,4 +37,4 @@ def check_valid(question, valid_options):
 print("Please enter the following details for the product!")
 name = input("Product name: ").title()
 weight = number_checker(f"Weight of {name} (without units): ")
-unit = check
+unit = check_valid("The unit for weight": )
