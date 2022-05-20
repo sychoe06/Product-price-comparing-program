@@ -31,9 +31,9 @@ def number_checker(question):
     # Get budget
     budget = number_checker("Enter budget: ")
 
-    # Get unit to use for products
+    # Get main unit for products
 
-    # Get name, weight and price of product
+    # Get product details
 
     # Calculate unit price
 
