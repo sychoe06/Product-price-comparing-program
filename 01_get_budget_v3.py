@@ -1,4 +1,4 @@
-"""Get budget - First iteration of 01_get_budget_v2
+"""Based on 01_get_budget_v2, (get budget)
 I developed trial 2 further by using a constant "ERROR" for the error message
 so that it can be more helpful for future proofing/editing.
 I also changed the error message so that normal users can understand what the
