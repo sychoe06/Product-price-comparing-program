@@ -30,6 +30,6 @@ valid_units = [["kg", "kilograms", "kilogram"],
                ["kl", "kilolitre", "kiloliter", "kilolitres", "kiloliters"],
                ["ml", "millilitre", "milliliter", "millilitres",
                 "milliliters"]]
-main_unit = check_units("Enter main unit for products (e.g. kg, ml etc): ",
+main_unit = check_valid("Enter main unit for products (e.g. kg, ml etc): ",
                         valid_units)
 print("valid")  # prints "valid" for testing purposes
