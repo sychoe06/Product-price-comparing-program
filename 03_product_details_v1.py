@@ -55,4 +55,4 @@ while name != "X":
         weight = number_checker(f"Weight of {name} (without units): ")
         unit = check_valid("The unit for weight: ", valid_units)
         price = number_checker("Price (without $ sign): ")
-        print()
+        print("-" * 40)
