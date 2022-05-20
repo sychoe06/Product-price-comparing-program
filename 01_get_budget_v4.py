@@ -1,4 +1,4 @@
-"""Get budget - Second iteration of 01_get_budget_v3
+"""Based on 01_get_budget_v3, (get budget)
 Changed "ERROR" to lowercase because no capital letters are allowed in a
 function. This follows the PEP8 standard.
 """
