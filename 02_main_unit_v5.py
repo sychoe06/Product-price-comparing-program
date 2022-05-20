@@ -1,9 +1,9 @@
-"""Get main unit for products - First iteration of trial 4
+"""Get main unit for products - Iteration of trial 4
 Made the list for "valid_units" more flexible by adding different variations
 of the units that way there is more than one way to enter a unit.
 Also made an "error" constant (in lowercase) for the error message.
 In order to prevent any errors I also put in examples of units to enter in the
-input statement.
+input statement and changed the error message to being more generic
 """
 
 

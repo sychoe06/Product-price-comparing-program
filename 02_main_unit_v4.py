@@ -1,7 +1,7 @@
 """Get main unit for products - Trial 4
 Uses two parameters "question" and "valid_options" so that the function can be
 re-used more than once. So it doesn't only check units but could check for
-other options later in the program. The error message is more generic now
+other options later in the program.
 """
 
 
