@@ -1,10 +1,8 @@
-"""Based on 03_product_details_v1, (get product details)
-I realised that later it will be harder to compare products if some products
-have different unit measurements in its weight.
-So I used For loops to check if the unit matches main unit and if it does then
-convert the unit to the main unit. (line 81-115)
-I also made separate lists for each of the 3 types of unit measurements.
-(line 50-62)
+"""Based on 03_product_details_v2, (get product details) - Trial 2
+To solve the issue of having a messy layout because of too many For loops in
+the main routine, I moved all the For loops into a single function. This helps
+as it can clear up some space in the main routine making it more simple and
+better layout and still produces the same results.
 """
 
 
@@ -36,6 +34,52 @@ def check_valid(question, valid_options):
 
         print(error)
         return check_valid(question, valid_options)
+
+
+# Converts product weight's unit to match main unit
+def unit_converter():
+    # If unit = kg or kl
+    for unit_kil in kilo_units:
+        if unit in unit_kil:
+            # If main unit = g or L
+            for mid in middle_units:
+                if main_unit in mid:
+                    new_weight = weight * 1000
+                    return new_weight
+            # If main unit = mg or ml
+            for mil in milli_units:
+                if main_unit in mil:
+                    new_weight = weight * 1000000
+                    return new_weight
+
+    # If unit = g or L
+    for unit_mid in middle_units:
+        if unit in unit_mid:
+            # If main unit = kg or kl
+            for kil in kilo_units:
+                if main_unit in kil:
+                    new_weight = weight / 1000
+                    return new_weight
+            # If main unit = mg or ml
+            for mil in milli_units:
+                if main_unit in mil:
+                    new_weight = weight * 1000
+                    return new_weight
+
+    # If unit = mg or ml
+    for unit_mil in milli_units:
+        if unit in unit_mil:
+            # If main unit = kg or kl
+            for kil in kilo_units:
+                if main_unit in kil:
+                    new_weight = weight / 1000000
+                    return new_weight
+            # If main unit = g or L
+            for mid in middle_units:
+                if main_unit in mid:
+                    new_weight = weight / 1000
+                    return new_weight
+    return weight
 
 
 # Main routine
@@ -73,50 +117,11 @@ while name != "X":
     else:
         weight = number_checker(f"Weight of {name} (without units): ")
         unit = check_valid("The unit for weight: ", valid_units)
-        new_weight = weight
-
-        # Converts units into the main unit so that the weight are all in the
-        # same unit (this will help with comparing products later)
-
-        # If unit = kg or kl
-        for unit_kil in kilo_units:
-            if unit in unit_kil:
-                # If main unit = g or L
-                for mid in middle_units:
-                    if main_unit in mid:
-                        new_weight = weight * 1000
-                # If main unit = mg or ml
-                for mil in milli_units:
-                    if main_unit in mil:
-                        new_weight = weight * 1000000
-
-        # If unit = g or L
-        for unit_mid in middle_units:
-            if unit in unit_mid:
-                # If main unit = kg or kl
-                for kil in kilo_units:
-                    if main_unit in kil:
-                        new_weight = weight / 1000
-                # If main unit = mg or ml
-                for mil in milli_units:
-                    if main_unit in mil:
-                        new_weight = weight * 1000
-
-        # If unit = mg or ml
-        for unit_mil in milli_units:
-            if unit in unit_mil:
-                # If main unit = kg or kl
-                for kil in kilo_units:
-                    if main_unit in kil:
-                        new_weight = weight / 1000000
-                # If main unit = g or L
-                for mid in middle_units:
-                    if main_unit in mid:
-                        new_weight = weight / 1000
+        converted = unit_converter()
 
         # Testing purposes only - to show that conversion has occurred
         print(f"\nProduct weight: {weight}{unit}")
-        print(f"Converted to main unit weight: {new_weight}{main_unit}\n")
+        print(f"Converted to main unit weight: {converted}{main_unit}\n")
 
         price = number_checker("Price (without $ sign): ")
         print("-" * 40)
