@@ -139,7 +139,6 @@ while name != "X":
         unit = finding_l_unit(unit)
         main_unit = finding_l_unit(main_unit)
 
-        # Testing purposes only - to show that conversion has occurred
         print(f"\nProduct weight: {weight}{unit}")
         print(f"Converted to main unit weight: "
               f"{converted_weight}{main_unit}\n")

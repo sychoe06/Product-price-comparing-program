@@ -185,7 +185,6 @@ while name != "X":
                 if milli is True:
                     new_weight = weight
 
-        # Testing purposes only - to show that conversion has occurred
         print(f"\nProduct weight: {weight}{unit}")
         print(f"Converted to main unit weight: {new_weight}{main_unit}\n")
 

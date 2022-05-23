@@ -114,7 +114,6 @@ while name != "X":
                     if main_unit in mid:
                         new_weight = weight / 1000
 
-        # Testing purposes only - to show that conversion has occurred
         print(f"\nProduct weight: {weight}{unit}")
         print(f"Converted to main unit weight: {new_weight}{main_unit}\n")
 
