@@ -34,6 +34,7 @@ def check_valid(question, valid_options):
         print(error)
         return check_valid(question, valid_options)
 
+
 # ******** Main Routine ********
 
 # Set up dictionaries / lists needed to hold data
@@ -47,20 +48,20 @@ valid_units = [["kg", "kilograms", "kilogram"],
 # Ask user if they have used the program before and
 # show instructions if necessary
 
+# Get budget
+budget = number_checker("Enter budget: ")
+
+# Get main unit for products
+main_unit = check_valid("Enter main unit for products (e.g. kg, ml etc): ",
+                        valid_units)
+
+# Get product details (3)
+
+# Calculate unit price (4)
+
+# Append details to list (5)
+
 # Repeat component 3-5 until "X" (loop)
-
-    # Get budget
-    budget = number_checker("Enter budget: ")
-
-    # Get main unit for products
-    main_unit = check_units("Enter main unit for products (e.g. kg, ml etc): ",
-                            valid_units)
-
-    # Get product details
-
-    # Calculate unit price
-
-    # Append details to list
 
 # Display all products details (within budget)
 
