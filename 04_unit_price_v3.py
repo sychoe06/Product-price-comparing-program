@@ -1,5 +1,5 @@
 """Calculate unit price - trial 3
-I used ".format()" to format my unit price to 2dp when I have calculated it.
+I used "{:.2f}".format() to format my unit price to 2dp after the calculation.
 """
 # Using input statements for testing purposes only!
 weight = float(input("Enter weight: "))
