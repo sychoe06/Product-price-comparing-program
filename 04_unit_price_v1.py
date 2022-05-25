@@ -7,6 +7,6 @@ weight = float(input("Enter weight: "))
 unit = input("Enter unit: ")
 price = float(input("Enter price: "))
 
-# Calculates unit price
+# Calculates unit price - prints for testing purposes
 unit_price = round(price / weight, 2)  # Rounds to 2dp
 print(f"Unit price: ${unit_price} per {unit}")
