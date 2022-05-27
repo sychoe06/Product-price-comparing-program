@@ -1,4 +1,4 @@
-"""Append details to list - based on 05_append_details_v1 (testing 2)
+"""Append details to list - based on 05_append_details_v1
 Appends the details of one product into a list and then prints out list for
 testing purposes to show that it was successfully added in.
 """
