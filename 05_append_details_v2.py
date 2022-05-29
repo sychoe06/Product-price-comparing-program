@@ -9,7 +9,7 @@ unit_list = ["g", "kg", "mg", "L", "kl", "ml"]
 # Temporary input statements - for testing purposes only
 budget = float(input("Budget: "))
 
-name = input("Product name: ")
+name = input("Name: ")
 product_list.append(name)
 
 weight = float(input("Weight: "))
