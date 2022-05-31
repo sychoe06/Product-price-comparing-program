@@ -6,4 +6,5 @@ products_above_budget = [["Moccona", 0.12]]
 
 test = [1, 1, 2, 3]
 
-print(min(test))
+v = (min(test))
+print(v)
