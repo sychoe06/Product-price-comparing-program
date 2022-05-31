@@ -24,7 +24,7 @@ products_within_budget = [["Greggs", 0.04],
 
 unit = "g"  # unit is for testing purposes only
 
-# Creates the products within budget dictionary with a label and then
+# Creates the products above budget dictionary with a label and then
 # a list for the product details like name and unit price
 products_above_dict = {
     "Name": name_list,
