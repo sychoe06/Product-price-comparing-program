@@ -167,16 +167,16 @@ while name != "X":
         # Append details to list
         # Checking if product price is within or above budget
         if price <= budget:
-            products_within_budget.append(
-                [name, new_weight, new_unit, price, unit_price])
+            products_within_budget.append([name, unit_price])
         else:
-            products_above_budget.append(
-                [name, new_weight, new_unit, price, unit_price])
+            products_above_budget.append([name, unit_price])
 
         print("-" * 40)  # decoration
 
 # Display all products details (within budget)
+print(products_within_budget)
 
+print(products_above_budget)
 # Display all products outside budget
 
 # Recommendation for "best buy"
