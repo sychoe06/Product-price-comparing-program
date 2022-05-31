@@ -146,9 +146,6 @@ unit_price_list_within = []
 name_list_above = []
 unit_price_list_above = []
 
-# Put the separate lists above into a master list (products within budget)
-product_list_within = [name_list_within, unit_price_list_within]
-
 # Creates the products within budget dictionary with a label and then
 # a list for the product details like name and unit price
 products_within_dict = {
