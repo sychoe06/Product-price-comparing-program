@@ -14,11 +14,8 @@ def currency(number):
 name_list = []
 unit_price_list = []
 
-# Put the separate lists above into a master list
-product_list = [name_list, unit_price_list]
-
 # Test data list
-products_within_budget = [["Greggs", 0.04],
+products_above_budget = [["Greggs", 0.04],
                           ["Moccona", 0.12],
                           ["Nescafe", 0.04]]
 
@@ -32,7 +29,7 @@ products_above_dict = {
 }
 
 # Adds the product details from list into the lists inside the dictionary
-for details in products_within_budget:
+for details in products_above_budget:
     products_above_dict["Name"] += [details[0]]  # Adds name
     products_above_dict["Unit Price"] += [details[1]]  # Adds unit price
 
