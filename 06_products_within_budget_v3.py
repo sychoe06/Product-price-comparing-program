@@ -16,9 +16,6 @@ def currency(number):
 name_list = []
 unit_price_list = []
 
-# Put the separate lists above into a master list
-product_list = [name_list, unit_price_list]
-
 # Test data list
 products_within_budget = [["Greggs", 0.04],
                           ["Moccona", 0.12],
