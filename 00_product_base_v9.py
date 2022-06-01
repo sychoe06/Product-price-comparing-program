@@ -1,4 +1,4 @@
-"""Based on 00_product_base_v9
+"""Based on 00_product_base_v8
 I realised that having added 06_products_within_budget_v3 and
 07_products_above_budget_v1 added into this base code made the program have too
 many lines. There are lots of repeating codes in both components. So I decided
