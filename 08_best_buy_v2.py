@@ -1,4 +1,7 @@
-"""Recommendation for "best buy" - testing 1
+"""Recommendation for "best buy" - based on 08_best_buy_v1
+Placed some repeating codes into a function - this is for finding the best buy
+This will help make the layout of the code look more neater and take up less
+space.
 """
 import pandas
 
@@ -40,7 +43,15 @@ def display_details(products_list, products_dict, within_or_above):
         print()
 
 
-# Test data in lists
+# Finds best buy for products above or within budget
+def best_buy(products_list, lowest_unit_price):
+    for value in products_list:
+        if value[1] == lowest_unit_price:  # finds unit price in list
+            product_best_buy = value[0]  # finds name of best buy
+            return product_best_buy
+
+
+# Test data in lists (can change)
 products_within_budget = [["Greggs", 0.04], ["Nescafe", 0.06]]
 products_above_budget = [["Moccona", 0.12]]
 
@@ -51,8 +62,6 @@ unit_price_list_within = []
 # Creates separate list for name and unit price for the products above budget
 name_list_above = []
 unit_price_list_above = []
-
-product_list_within = [name_list_within, unit_price_list_within]
 
 # Creates the products within budget dictionary with a label and then
 # a list for the product details like name and unit price
@@ -80,19 +89,29 @@ lowest_unit_price_within = min(unit_price_list_within)
 # Finding product with lowest unit price that is above the budget
 lowest_unit_price_above = min(unit_price_list_above)
 
+# Finding names of the products that are the best buy and not best buy
+best_buy_name = best_buy(products_within_budget, lowest_unit_price_within)
+not_best_buy_name = best_buy(products_above_budget, lowest_unit_price_above)
+best_buy_name_one = best_buy(products_above_budget, lowest_unit_price_above)
+best_buy_name_two = best_buy(products_within_budget, lowest_unit_price_within)
+
+# Best buy and not best buy recommendation variables
+best_buy_product = f"Best buy: {best_buy_name} - ${lowest_unit_price_within} "\
+                   f"per {unit} and within budget"
+not_best_buy = f"Cheapest unit price: {not_best_buy_name} - "\
+               f"${lowest_unit_price_above} per {unit} but above budget"
+
+# Finding the names for the products with lowest unit prices
 if lowest_unit_price_above > lowest_unit_price_within:
-    best_buy_unit_price = lowest_unit_price_within
-    for x in products_within_budget:
-        if x[1] == best_buy_unit_price:
-            best_buy_name = x[0]
-            print(f"Best buy: {best_buy_name} - "
-                  f"${best_buy_unit_price} per {unit}")
+    # Best buy is within budget with cheapest unit price
+    print(best_buy_product)
 elif lowest_unit_price_above < lowest_unit_price_within:
-    best_buy_unit_price = lowest_unit_price_above
-    for x in products_above_budget:
-        if x[1] == best_buy_unit_price:
-            best_buy_name = x[0]
-            print(f"Best buy: {best_buy_name} - "
-                  f"${best_buy_unit_price} per {unit} but it isn't within"
-                  f"your budget.")
-            print(f"So other best buy: ")
+    # cheapest unit price is not best buy because it is above budget
+    print(not_best_buy)
+    print(best_buy_product)
+else:  # If cheapest unit prices are equal, product within budget is best buy
+    print(f"Cheapest unit price #1: {best_buy_name_one} - "
+          f"${lowest_unit_price_above} per {unit} but above budget")
+    print(f"Cheapest unit price #2: {best_buy_name_two} - "
+          f"${lowest_unit_price_within} per {unit} but within budget")
+    print(f"So best buy: {best_buy_name_two}\n")
