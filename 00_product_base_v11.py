@@ -1,7 +1,9 @@
-"""Added 08_best_buy_v2 to original v9 of this base code
-Changed "unit" in the "best buy" coding to "main_unit" because all the products
-will be converted to have the same main unit. Checks again if main_unit is
-'l' or not - to make sure that if it is 'l' then it is changed to 'L'.
+"""Added 09_save_data_in_file_v3 to original v10 of this base code
+This code is the Assembled outcome program before the usability testing!
+Edited the recommendation for best buy coding to make sure that the program
+does not crash when there are no products entered, no products above the budget
+or no products within the budget. Also made the display details function to
+return the product_frame.
 """
 # Import statements
 import re
@@ -138,6 +140,7 @@ def display_details(products_list, products_dict, within_or_above):
 
         print(product_frame)  # Prints data frame
         print()
+        return product_frame
 
 
 # Finds best buy for products above or within budget
@@ -146,6 +149,19 @@ def best_buy(products_list, lowest_unit_price):
         if value[1] == lowest_unit_price:  # finds unit price in list
             product_best_buy = value[0]  # finds name of best buy
             return product_best_buy
+
+
+# Checking whether answer to question is 'Y' or 'N'
+def yes_or_no(question):
+    error = "Error! Please enter 'Y' or 'N' to answer this question\n"
+    valid_answers = [["Y", "Yes"], ["N", "No"]]  # valid answers list
+    valid = False
+    while valid is False:  # assuming that answer is not valid
+        answer = input(question).title()
+        for answer_list in valid_answers:
+            if answer in answer_list:  # if answer is in valid_answers list
+                return answer_list[0]  # returns 'Y' or 'N'
+        print(error)  # print error if answer is not valid
 
 
 # ******** Main Routine ********
@@ -246,50 +262,97 @@ while name != "X":
         print("-" * 40)  # decoration
 
 print()
-print("-" * 60)
-
-# Display the details of the products within the budget
-display_details(products_within_budget, products_within_dict, "within")
-
-# Display the details of the products above the budget
-display_details(products_above_budget, products_above_dict, "above")
-
-# Recommendation for "best buy"
-# Finding product with lowest unit price that is within the budget
-lowest_unit_price_within = min(unit_price_list_within)
-# Finding product with lowest unit price that is above the budget
-lowest_unit_price_above = min(unit_price_list_above)
-
-# Finding names of the products that are the best buy and not best buy
-best_buy_name = best_buy(products_within_budget, lowest_unit_price_within)
-not_best_buy_name = best_buy(products_above_budget, lowest_unit_price_above)
-best_buy_name_one = best_buy(products_above_budget, lowest_unit_price_above)
-best_buy_name_two = best_buy(products_within_budget, lowest_unit_price_within)
+print("-" * 50)
 
 main_unit = finding_l_unit(main_unit)  # checks if main_unit is 'l' or not
 
-# Best buy and not best buy recommendation variables
-best_buy_product = f"So best buy is {best_buy_name} " \
-                   f"(${lowest_unit_price_within} per {main_unit})"
-not_best_buy = f"{not_best_buy_name} has cheapest unit price " \
-               f"(${lowest_unit_price_above} per {main_unit})\nBut is not " \
-               f"best buy because it is above the budget"
+# Display the details of the products within the budget
+product_frame_within = display_details(products_within_budget,
+                                       products_within_dict, "within")
+# Display the details of the products above the budget
+product_frame_above = display_details(products_above_budget,
+                                      products_above_dict, "above")
 
+# Recommendation for "best buy"
 print("\n---- BEST BUY RECOMMENDATION ----")
+# If there have been no product details entered means no unit prices
+if len(unit_price_list_above) == 0 and len(unit_price_list_within) == 0:
+    print("There is no best buy because\nno products have been entered!\n")
+    print("-" * 50)
+    quit()  # this is a built in function - makes program end
+else:
+    # No products within budget means there are no unit prices within budget
+    if len(unit_price_list_within) == 0:
+        # Finding lowest unit price
+        lowest_unit_price_above = min(unit_price_list_above)
+        # Finding name for product with lowest unit price
+        not_best = best_buy(products_above_budget, lowest_unit_price_above)
 
-# Finding the names for the products with lowest unit prices
-if lowest_unit_price_above > lowest_unit_price_within:
-    # Best buy is within budget with cheapest unit price
-    print(best_buy_product)
-elif lowest_unit_price_above < lowest_unit_price_within:
-    # cheapest unit price is not best buy because it is above budget
-    print(not_best_buy, "\n")
-    print(best_buy_product)
-else:  # If cheapest unit prices are equal, product within budget is best buy
-    print(f"Both {best_buy_name_one} and {best_buy_name_two} have the same\n"
-          f"cheapest unit price ${lowest_unit_price_within} per {main_unit}\n"
-          f"\nBut {best_buy_name_one} is above the budget\n"
-          f"So best buy is {best_buy_name_two}")
+        print(f"{not_best} has cheapest unit price (${lowest_unit_price_above}"
+              f" per {main_unit})\nBut is not best buy because it is above "
+              f"your budget.\nSo there is no best buy!")
+    # No products above budget means there are no unit prices above budget
+    elif len(unit_price_list_above) == 0:
+        # Finding lowest unit price
+        lowest_unit_price_within = min(unit_price_list_within)
+        # Finding name for product with lowest unit price
+        best = best_buy(products_within_budget, lowest_unit_price_within)
+
+        print(f"Best buy is {best} (${lowest_unit_price_within} per "
+              f"{main_unit})")
+    else:
+        # Finding lowest unit prices
+        lowest_unit_price_above = min(unit_price_list_above)
+        lowest_unit_price_within = min(unit_price_list_within)
+        # Finding name for product with lowest unit prices
+        best = best_buy(products_within_budget, lowest_unit_price_within)
+        best_one = best_buy(products_above_budget, lowest_unit_price_above)
+        best_two = best_buy(products_within_budget, lowest_unit_price_within)
+        not_best = best_buy(products_above_budget, lowest_unit_price_above)
+
+        recommend_best_buy = f"Best buy is {best} " \
+                             f"(${lowest_unit_price_within} per {main_unit})"
+
+        # Best buy is within budget with cheapest unit price
+        if lowest_unit_price_above > lowest_unit_price_within:
+            print(recommend_best_buy)
+        # cheapest unit price is not best buy because it is above budget
+        elif lowest_unit_price_above < lowest_unit_price_within:
+            print(f"{not_best} has cheapest unit price "
+                  f"(${lowest_unit_price_above} per {main_unit})\nBut is not "
+                  f"best buy because it is above your budget.\n")
+            print(recommend_best_buy)
+        # If cheapest unit prices are equal, product within budget is best buy
+        else:
+            print(f"Both {best_one} and {best_two} have same\n cheapest unit "
+                  f"price ${lowest_unit_price_within} per {main_unit}\n\nBut "
+                  f"{best_one} is above the budget\nSo best buy is {best_two}")
+print("-" * 35, "\n")
 
 # Save data in a file
-print("-" * 60)
+save_data = yes_or_no("Save products details in excel files? (Y/N): ")
+if save_data == "Y":  # If yes then save data
+    # If there are no products within budget...
+    if len(unit_price_list_within) == 0:
+        # Write frame to csv file for products above budget
+        product_frame_above.to_csv("products_above_budget.csv")
+        print("\nProducts details have been saved to an excel file!\n")
+        print("Note: To see saved details of products find an\nexcel file "
+              "called products_above_budget.csv\n")
+    # If there are no products above budget...
+    elif len(unit_price_list_above) == 0:
+        # Write frame to csv file for products within budget
+        product_frame_within.to_csv("products_within_budget.csv")
+        print("\nProducts details have been saved to an excel file!\n")
+        print("Note: To see saved details of products find an\nexcel file "
+              "called products_within_budget.csv\n")
+    else:
+        # Write each frame to separate csv files for within and above
+        product_frame_above.to_csv("products_above_budget.csv")
+        product_frame_within.to_csv("products_within_budget.csv")
+        print("\nProducts details have been saved to excel files!\n")
+        print("Note: To see saved details of products find excel files called "
+              "\nproducts_within_budget.csv and products_above_budget.csv\n")
+else:  # If no then don't save data
+    print("\nProducts details have NOT been saved to excel files!\n")
+print("-" * 50)
