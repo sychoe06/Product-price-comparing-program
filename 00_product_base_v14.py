@@ -1,10 +1,6 @@
-"""Edited v11 of this base code by adding some coding to calculate the
-average unit price of all the products. I did this by adding the weights and
-prices of the products to the total_weights_list and total_prices_list. Then
-I used sum() to sum up the lists and make the total_weight and total_price.
-Then I calculated the average unit price by dividing the total_price by
-total_weight then formatted it correctly using currency function.
-I added these coding in lines 266-267 and lines 282-286.
+"""Post usability testing 1 - small editing
+Adding decoration before the first product name input. Changing the word
+"product" in "please enter the following details for the product" to plural.
 """
 # Import statements
 import re
@@ -220,19 +216,52 @@ products_above_dict = {
     "Unit Price": unit_price_list_above
 }
 
-# Ask user if they have used the program before and
-# show instructions if necessary
+# Ask user if they have used the program before and if not, show instructions
+instructions = yes_or_no("Do you want the instructions? (Y/N): ")
+if instructions == "Y":
+    print("\n\t- - - - - Instructions - - - - -"
+          "\nThis is a program which compares the unit prices\n"
+          "of different products. It will help you be able to\n"
+          "decide which product you should buy.\n\n"
+          
+          "Enter your budget which is the maximum limit of money\n"
+          "you are willing to spend (don’t include the $ sign).\n"
+          "Then enter the main unit which will convert the units\n"
+          "of a product to match the main unit. This will help\n"
+          "keep the units of the products all the same.\n\n"
+          
+          "After that enter the details of your products like...\n"
+          "the name, weight, unit and price. Make sure to not\n"
+          "include the $ sign for the price. And enter the\n"
+          "weight and the unit of the product separately.\n\n"
+          
+          "Enter 'X' instead of entering the product name.\n"
+          "This will display the...\n"
+          "\t>> Names of each product\n"
+          "\t>> Unit prices of each product\n"
+          "\t>> Cheapest unit price\n"
+          "\t>> Most expensive unit price\n"
+          "\t>> Average unit price\n"
+          "\t>> And the Best Buy\n\n"
+          
+          "The 'best buy' is the recommended product to buy\n"
+          "because it has the cheapest unit price and is\n"
+          "within your budget range.")
+    print("\t", "- " * 15)
+else:
+    print("You have chosen not to see instructions for this program")
 
 # Get budget
-budget = number_checker("Enter budget: ")
+budget = number_checker("\nEnter budget: ")
 
 # Get main unit for products
 main_unit = check_valid("Enter main unit for products (e.g. kg, ml etc): ",
                         valid_units)
 
 # Get product details
-print("\nPlease enter the following details for the product\n")
+print("\nPlease enter the following details for the products\n")
 while name != "X":
+    print("-" * 40)  # decoration
     # Product details
     name = input("Product name or 'X' to finish: ").title()
     if name == "X":
@@ -265,7 +294,6 @@ while name != "X":
 
         total_weights_list.append(new_weight)  # adds converted weight to list
         total_prices_list.append(price)  # adds price to list
-        print("-" * 40)  # decoration
 
 print()
 print("-" * 50)

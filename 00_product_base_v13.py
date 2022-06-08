@@ -247,6 +247,8 @@ if instructions == "Y":
           "because it has the cheapest unit price and is\n"
           "within your budget range.")
     print("\t", "- " * 15)
+else:
+    print("You have chosen not to see instructions for this program")
 
 # Get budget
 budget = number_checker("\nEnter budget: ")
@@ -308,7 +310,9 @@ product_frame_above = display_details(products_above_budget,
 total_price = sum(total_prices_list)
 total_weight = sum(total_weights_list)
 average_unit_price = total_price / total_weight
-print(f"\nAverage unit price of all products: {currency(average_unit_price)}")
+print("\n---- AVERAGE UNIT PRICE ----")
+print(f"Average unit price is {currency(average_unit_price)}")
+print("-" * 35, "\n")
 
 # Recommendation for "best buy"
 print("\n---- BEST BUY RECOMMENDATION ----")
