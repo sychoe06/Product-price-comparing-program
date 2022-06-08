@@ -107,7 +107,7 @@ def finding_l_unit(check_unit):
 
 # Currency formatting function for unit price only
 def currency(number):
-    return f"${number:,.2f} per {unit}"
+    return f"${number:,.2f} per {main_unit}"
 
 
 # Display product details function (for products within or above budget)
@@ -288,9 +288,9 @@ else:
         # Finding name for product with lowest unit price
         not_best = best_buy(products_above_budget, lowest_unit_price_above)
 
-        print(f"{not_best} has cheapest unit price (${lowest_unit_price_above}"
-              f" per {main_unit})\nBut is not best buy because it is above "
-              f"your budget.\nSo there is no best buy!")
+        print(f"{not_best} has cheapest unit price "
+              f"({currency(lowest_unit_price_above)})\nBut is not best buy "
+              f"because it is above your budget.\nSo there is no best buy!")
     # No products above budget means there are no unit prices above budget
     elif len(unit_price_list_above) == 0:
         # Finding lowest unit price
@@ -298,8 +298,7 @@ else:
         # Finding name for product with lowest unit price
         best = best_buy(products_within_budget, lowest_unit_price_within)
 
-        print(f"Best buy is {best} (${lowest_unit_price_within} per "
-              f"{main_unit})")
+        print(f"Best buy is {best} ({currency(lowest_unit_price_within)})")
     else:
         # Finding lowest unit prices
         lowest_unit_price_above = min(unit_price_list_above)
@@ -311,7 +310,7 @@ else:
         not_best = best_buy(products_above_budget, lowest_unit_price_above)
 
         recommend_best_buy = f"Best buy is {best} " \
-                             f"(${lowest_unit_price_within} per {main_unit})"
+                             f"({currency(lowest_unit_price_within)})"
 
         # Best buy is within budget with cheapest unit price
         if lowest_unit_price_above > lowest_unit_price_within:
@@ -319,28 +318,28 @@ else:
         # cheapest unit price is not best buy because it is above budget
         elif lowest_unit_price_above < lowest_unit_price_within:
             print(f"{not_best} has cheapest unit price "
-                  f"(${lowest_unit_price_above} per {main_unit})\nBut is not "
+                  f"({currency(lowest_unit_price_above)})\nBut is not "
                   f"best buy because it is above your budget.\n")
             print(recommend_best_buy)
         # If cheapest unit prices are equal, product within budget is best buy
         else:
             print(f"Both {best_one} and {best_two} have same\n cheapest unit "
-                  f"price ${lowest_unit_price_within} per {main_unit}\n\nBut "
+                  f"price {currency(lowest_unit_price_within)}\n\nBut "
                   f"{best_one} is above the budget\nSo best buy is {best_two}")
 print("-" * 35, "\n")
 
 # Save data in a file
-save_data = yes_or_no("Save products details in excel files? (Y/N): ")
-if save_data == "Y":  # If yes then save data
+save_product_details = yes_or_no("Save products details in excel files? (Y/N): ")
+if save_product_details == "Y":  # If yes then save data
     # If there are no products within budget...
-    if len(unit_price_list_within) == 0:
+    if len(products_within_budget) == 0:
         # Write frame to csv file for products above budget
         product_frame_above.to_csv("products_above_budget.csv")
         print("\nProducts details have been saved to an excel file!\n")
         print("Note: To see saved details of products find an\nexcel file "
               "called products_above_budget.csv\n")
     # If there are no products above budget...
-    elif len(unit_price_list_above) == 0:
+    elif len(products_above_budget) == 0:
         # Write frame to csv file for products within budget
         product_frame_within.to_csv("products_within_budget.csv")
         print("\nProducts details have been saved to an excel file!\n")
@@ -348,8 +347,8 @@ if save_data == "Y":  # If yes then save data
               "called products_within_budget.csv\n")
     else:
         # Write each frame to separate csv files for within and above
-        product_frame_above.to_csv("products_above_budget.csv")
         product_frame_within.to_csv("products_within_budget.csv")
+        product_frame_above.to_csv("products_above_budget.csv")
         print("\nProducts details have been saved to excel files!\n")
         print("Note: To see saved details of products find excel files called "
               "\nproducts_within_budget.csv and products_above_budget.csv\n")
