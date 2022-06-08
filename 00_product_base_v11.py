@@ -1,4 +1,4 @@
-"""Added 09_save_data_in_file_v3 to original v10 of this base code
+"""Added 09_save_data_in_file_v4 to original v10 of this base code
 This code is the Assembled outcome program before the usability testing!
 
 Edited the recommendation for best buy coding to make sure that the program
@@ -30,17 +30,14 @@ def number_checker(question):
 
 # Checks for valid options
 def check_valid(question, valid_options):
-    error = "Sorry that is not a valid choice\n"
+    error = "Sorry that is not a valid answer\n"
     getting_option = "yes"
     while getting_option == "yes":
         response = input(question).lower()
         for option in valid_options:
-            if response in option:
-                response = option[0].lower()
-                return response
-
+            if response in option:  # if answer is in valid_answers list
+                return option[0]
         print(error)
-        return check_valid(question, valid_options)
 
 
 # Converts product weight's unit to match main unit
@@ -152,19 +149,6 @@ def best_buy(products_list, lowest_unit_price):
             return product_best_buy
 
 
-# Checking whether answer to question is 'Y' or 'N'
-def yes_or_no(question):
-    error = "Error! Please enter 'Y' or 'N' to answer this question\n"
-    valid_answers = [["Y", "Yes"], ["N", "No"]]  # valid answers list
-    valid = False
-    while valid is False:  # assuming that answer is not valid
-        answer = input(question).title()
-        for answer_list in valid_answers:
-            if answer in answer_list:  # if answer is in valid_answers list
-                return answer_list[0]  # returns 'Y' or 'N'
-        print(error)  # print error if answer is not valid
-
-
 # ******** Main Routine ********
 # Set up variables
 name = ""
@@ -191,6 +175,8 @@ middle_units = [["g", "grams", "gram"],
 milli_units = [["mg", "milligrams", "milligram"],
                ["ml", "millilitre", "milliliter", "millilitres",
                 "milliliters"]]
+
+yes_no = [["y", "yes"], ["n", "no"]]  # valid yes and no list
 
 products_within_budget = []  # list for products within budget
 products_above_budget = []  # list for products above budget
@@ -330,8 +316,8 @@ else:
 print("-" * 35, "\n")
 
 # Save data in a file
-save_product_details = yes_or_no("Save products details in excel files? (Y/N): ")
-if save_product_details == "Y":  # If yes then save data
+save = check_valid("Save products details in excel files? (Y/N): ", yes_no)
+if save == "y":  # If yes then save data
     # If there are no products within budget...
     if len(products_within_budget) == 0:
         # Write frame to csv file for products above budget
