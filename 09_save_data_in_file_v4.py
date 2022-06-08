@@ -1,8 +1,9 @@
-"""Save data in file - Trialling (trial 1)
-Made a generic Yes/No function for yes/no questions. This is for the input
-statement that is asking the users whether or not they want to save the product
-details in separate excel files. This means that I can also allow different
-variations of answers like “y”, “yes”, “n” and “no”.
+"""Save data in file - Trialling (trial 2)
+I used the same function called "check_valid" which is a generic function
+that checks for a valid answer from 03_product_details_v5. I tried to make it
+work for the yes / no question input statement of this component. Shortened
+the input variable "save_data" to "save". And took out the yes/no valid answers
+list outside of the function.
 """
 import pandas
 
@@ -44,17 +45,16 @@ def display_details(products_list, products_dict, within_or_above):
         return product_frame
 
 
-# Checking whether answer to question is 'Y' or 'N'
-def yes_or_no(question):
+# Checks for valid options (taken from 03_product_details_v5)
+def check_valid(question, valid_options):
     error = "Sorry that is not a valid answer\n"
-    valid_answers = [["Y", "Yes"], ["N", "No"]]  # valid answers list
-    valid = False
-    while valid is False:  # assuming that answer is not valid
-        answer = input(question).title()
-        for answer_list in valid_answers:
-            if answer in answer_list:  # if answer is in valid_answers list
-                return answer_list[0]  # returns 'Y' or 'N'
-        print(error)  # print error if answer is not valid
+    getting_option = "yes"
+    while getting_option == "yes":
+        response = input(question).lower()
+        for option in valid_options:
+            if response in option:  # if answer is in valid_answers list
+                return option[0]
+        print(error)
 
 
 unit = "g"  # test unit
@@ -62,6 +62,8 @@ unit = "g"  # test unit
 # Test data
 products_within_budget = [["Greggs", 0.04], ["Nescafe", 0.06]]
 products_above_budget = [["Moccona", 0.12]]
+
+yes_no = [["y", "yes"], ["n", "no"]]  # valid answers list
 
 # Creates separate list for name and unit price for the products within budget
 name_list_within = []
@@ -93,8 +95,9 @@ product_frame_within = display_details(products_within_budget,
 product_frame_above = display_details(products_above_budget,
                                       products_above_dict, "above")
 
-save_data = yes_or_no("Save products details in excel files? (Y/N): ")
-if save_data == "Y":
+# Ask if user wants to save data to files
+save = check_valid("Save products details in excel files? (Y/N): ", yes_no)
+if save == "y":
     # Write each frame to separate csv files
     product_frame_within.to_csv("products_within_budget.csv")
     product_frame_above.to_csv("products_above_budget.csv")
