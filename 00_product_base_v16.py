@@ -1,6 +1,7 @@
 """Final Assembled Outcome fully working program (Post usability testing 2)
 Add a welcome screen to the program at the start and aligned the instructions
 more towards the middle. Then added a message saying the program is starting.
+Also added constants and changed them from being literals.
 """
 # Import statements
 import re
@@ -26,7 +27,7 @@ def number_checker(question):
 
 # Checks for valid options
 def check_valid(question, valid_options):
-    error = "Sorry that is not a valid answer\n"
+    error = "Sorry that is not a valid answer\n"  # error message
     getting_option = "yes"
     while getting_option == "yes":
         response = input(question).lower()
@@ -149,6 +150,12 @@ def best_buy(products_list, lowest_unit_price):
 # Set up variables
 name = ""
 
+# Set up constants
+EXIT_SIGN = "X"
+SAVED_ONE_FILE = "\nProducts details have been saved to an excel file!\n"
+SAVED_TWO_FILES = "\nProducts details have been saved to excel files!\n"
+NOT_SAVED_FILES = "\nProducts details have NOT been saved to excel files!\n"
+
 # Set up dictionaries / lists needed to hold data
 total_weights_list = []  # All the weights of the products
 total_prices_list = []  # All the prices of the products
@@ -254,11 +261,11 @@ main_unit = check_valid("Enter main unit for products (e.g. kg, ml etc): ",
 
 # Get product details
 print("\nPlease enter the following details for the products\n")
-while name != "X":
+while name != EXIT_SIGN:
     print("-" * 40)  # decoration
     # Product details
     name = input("Product name or 'X' to finish: ").title()
-    if name == "X":
+    if name == EXIT_SIGN:
         break
     else:
         weight = number_checker(f"Weight of {name} (without units): ")
@@ -373,24 +380,24 @@ if save == "y":  # If yes then save data
     if len(products_within_budget) == 0:
         # Write frame to csv file for products above budget
         product_frame_above.to_csv("products_above_budget.csv")
-        print("\nProducts details have been saved to an excel file!\n")
+        print(SAVED_ONE_FILE)
         print("Note: To see saved details of products find an\nexcel file "
               "called products_above_budget.csv\n")
     # If there are no products above budget...
     elif len(products_above_budget) == 0:
         # Write frame to csv file for products within budget
         product_frame_within.to_csv("products_within_budget.csv")
-        print("\nProducts details have been saved to an excel file!\n")
+        print(SAVED_ONE_FILE)
         print("Note: To see saved details of products find an\nexcel file "
               "called products_within_budget.csv\n")
     else:
         # Write each frame to separate csv files for within and above
         product_frame_within.to_csv("products_within_budget.csv")
         product_frame_above.to_csv("products_above_budget.csv")
-        print("\nProducts details have been saved to excel files!\n")
+        print(SAVED_TWO_FILES)
         print("Note: To see saved details of products find excel files called "
               "\nproducts_within_budget.csv and products_above_budget.csv\n")
 else:  # If no then don't save data
-    print("\nProducts details have NOT been saved to excel files!\n")
+    print(NOT_SAVED_FILES)
 
 print("-" * 50)  # decoration
