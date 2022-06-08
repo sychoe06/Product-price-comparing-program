@@ -1,7 +1,7 @@
 """Added 08_best_buy_v2 to original v9 of this base code
 Changed "unit" in the "best buy" coding to "main_unit" because all the products
 will be converted to have the same main unit. Checks again if main_unit is
-'l' or not - to make sure that if it is 'l' then it is changed to 'L'.
+'l' or not - to make sure that if it is 'l' then it is changed to 'L'
 """
 # Import statements
 import re
